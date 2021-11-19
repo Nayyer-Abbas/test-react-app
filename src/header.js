@@ -1,11 +1,17 @@
 import React from "react";
-import { Container, Row, Col } from 'react-bootstrap';
 import {Navbar, Nav} from 'react-bootstrap';
 import { Link } from "react-router-dom";
-import './style.css';
+import { Container, Row, Col } from 'react-bootstrap';
 import Logo from './logo.svg';
+import $ from 'jquery';
 
 function Header() {
+    $(function() {
+        $('nav li a').click(function(){
+            $('nav li a').removeClass('active');
+            $(this).addClass('active');
+        });
+    });
     return(
         <header>
             <Container>
@@ -19,7 +25,7 @@ function Header() {
                             <Navbar.Collapse id="basic-navbar-nav">
                                 <Nav className="mx-auto my-auto">
                                     <ul>
-                                        <li><Link to="/">Home</Link></li>
+                                        <li><Link className="active" to="/">Home</Link></li>
                                         <li><Link to="/about">About</Link></li>
                                         <li><Link to="/services">Services</Link></li>
                                         <li><Link to="/contact">Contact</Link></li>

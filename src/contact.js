@@ -1,7 +1,6 @@
 import React from "react";
 import { ReactDOM } from "react";
 import { Container, Row, Col } from 'react-bootstrap';
-import './style.css';
 import {useState} from 'react';
 
 function Contact() {

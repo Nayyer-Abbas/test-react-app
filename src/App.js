@@ -6,6 +6,7 @@ import Contact from './contact.js';
 import Doctors from './doctors.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import './style.css';
 import Header from './header';
 
 
