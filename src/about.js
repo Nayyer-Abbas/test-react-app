@@ -75,7 +75,7 @@ function About () {
                                 </tbody>
                             </Table>
                             
-                            <form onSubmit={handleNewUserSave}>
+                            <form className="about-form" onSubmit={handleNewUserSave}>
                                 <h2>Enter New User</h2>
                                 <Row className="justify-content-center">
                                     <Col md={6}>

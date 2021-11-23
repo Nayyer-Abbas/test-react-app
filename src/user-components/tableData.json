@@ -1,0 +1,36 @@
+{ "tableData": [
+{
+    "id": 1, 
+    "name": "First", 
+    "gender": "Male",
+    "phone": "123456",
+    "email": "first@gmail.com"
+},
+{
+    "id": 2,
+    "name": "Second",
+    "gender": "Female",
+    "phone": "123456789",
+    "email": "second@gmail.com"
+},
+{
+    "id": 3,
+    "name": "Third",
+    "gender": "Male",
+    "phone":"123456789",
+    "email":"third@gmail.com"
+},
+{
+    "id": 4,
+    "name": "Forth",
+    "gender": "Female",
+    "phone":"123456789",
+    "email":"forth@gmail.com"
+},
+{
+    "id": 5,
+    "name": "Fifth",
+    "gender": "Male",
+    "phone":"123456789",
+    "email":"fifth@gmail.com"
+}]}
