@@ -30,3 +30,27 @@ header .menu ul li a:hover ,
 header .menu ul li a.active {
     color :#61DAFB;
 }
+table tr td button {
+    margin: 0 5px;
+}
+form {
+    box-shadow: 0 0 10px #999;
+    border-radius: 10px;
+    padding: 50px;
+    margin-top: 50px;
+}
+form h2 {
+    margin-bottom: 40px;
+}
+form input {
+    width: 95%;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+}
+form input[type="submit"]{
+    background-color: green;
+    color: #fff;
+    border: none;
+    margin-top: 30px;
+}
