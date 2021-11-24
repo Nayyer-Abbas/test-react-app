@@ -1,4 +1,4 @@
-{ "tableData": [
+[
 {
     "id": 1, 
     "name": "First", 
@@ -33,4 +33,4 @@
     "gender": "Male",
     "phone":"123456789",
     "email":"fifth@gmail.com"
-}]}
+}]

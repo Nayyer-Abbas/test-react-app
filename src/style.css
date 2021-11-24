@@ -58,3 +58,8 @@ form input[type="submit"]{
     border: none;
     margin-top: 30px;
 }
+.edit-form input[type="submit"] ,
+.edit-form .btn-warning {
+    width: 45%;
+    margin: 0 1%;
+}

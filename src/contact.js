@@ -1,54 +1,86 @@
 import React from "react";
-import { ReactDOM, useState } from "react";
-import { Container, Row, Col, Button } from 'react-bootstrap';
-import Table from 'react-bootstrap/Table';
-import tableData from "./user-components/tableData.json";
+import { useState } from "react";
+import { Container, Row, Col, Modal, Button } from 'react-bootstrap';
+import data from "./user-components/tableData.json";
+import AddUserForm from "./user-components/addUserForm";
+import Tabledata from "./user-components/userTable";
+import EditUserForm from "./user-components/editUserForm";
 
 function Contact () {
-    const tableUsers = [{tableData}];
-    const [users, setUsers] = useState(tableUsers);
 
+    const [users, setUsers] = useState(data);
+
+    const addUser = (user) => {
+        user.id =  users.length + 1
+        setUsers([...users, user])
+    }
+
+    const deleteUser = (id) => {
+        setUsers(users.filter((user) => user.id !==id))
+    }
+
+    const [editForm, setEditForm] = useState(false);
+
+
+    const initFormState = {id: "null", name:"", email:"", gender:"", phone:"" }
+    const [currentUser, setCurrentUser] = useState(initFormState);
+
+    const editRow = (user) => {
+        setEditForm(true)
+
+        setCurrentUser({ id: user.id, name: user.name, gender: user.gender, email: user.email, phone: user.phone })
+    }
+
+    const updateUser = (id, updatedUser) => {
+        setEditForm(true)
+
+        setUsers(users.map((user)=> (user.id === id ? updatedUser : user )))
+    }
+
+    const [modalShow, setModalShow] = React.useState(false);
+    const AddUserModal = (props) => {
+        return(
+            <Modal
+                {...props}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Header closeButton>
+                    <h2>Enter New User</h2>
+                </Modal.Header>
+                <Modal.Body>
+                    <AddUserForm addUser={addUser} onHide={props.onHide} />
+                </Modal.Body>
+            </Modal>
+        );
+    }
+
+    
 
     return(
         <>
             <section>
                 <Container>
                     <Row>
+                        <Col md={9} className="my-5">
+                            <h1>User Table</h1>
+                        </Col>
+                        <Col md={3} className="my-5">
+                            <Button className="mt-3 float-end" variant="success" onClick={() => setModalShow(true)}>Add New</Button>
+                        </Col>
                         <Col md={12} className="my-5 text-center">
-                            <h1 className="my-5">User Table</h1>
-                            <Table responsive bordered striped hover>
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Gender</th>
-                                        <th>Phone Number</th>
-                                        <th>Email Address</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                    
-                                </thead>
-                                <tbody>
-                                    {users.map((user, index) => (
-                                    <tr>
-                                        <td>{index+1}</td>
-                                        <td>{user.name}</td>
-                                        <td>{user.gender}</td>
-                                        <td>{user.phone}</td>
-                                        <td>{user.email}</td>
-                                        <td>
-                                            <Button variant="primary">Edit</Button>
-                                            <Button variant="danger">Delete</Button>
-                                        </td>
-                                    </tr>
-                                    ))}
-                                </tbody>
-                            </Table>
                             
+                            {/* <h1 className="my-5">User Table</h1> */}
+                            <Tabledata users={users} deleteUser={deleteUser}  editRow={editRow} />
+
+                            {/* <EditUserForm setEditForm={setEditForm} currentUser={currentUser} updateUser={updateUser} /> */}
                         </Col>
                     </Row>
                 </Container>
             </section>
+
+            <AddUserModal show={modalShow} onHide={() => setModalShow(false)} />
             
         </>
         

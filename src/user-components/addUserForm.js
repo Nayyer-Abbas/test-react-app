@@ -1,29 +1,48 @@
-import React from "react";
-import { useState } from "react";
+import React, {useState} from "react";
+import { Row, Col } from 'react-bootstrap';
 
-function addUserForm(){
+function AddUserForm(props){
+
+    const initFormState = {id: "null", name:"", email:"", gender:"", phone:"" }
+    const [user, setUser] = useState(initFormState);
+    
+    const handleInputChange = (event) => {
+        const { name, value} = event.target 
+        setUser({...user, [name]: value });
+        
+    }
+    
     return(
-        <form className="about-form">
-            <h2>Enter New User</h2>
+        
+        <form
+            onSubmit={(event) =>{
+                event.preventDefault();
+                if(!user.name || !user.gender || !user.email || !user.email ) return 
+                props.addUser(user)
+                setUser(initFormState);
+                props.onHide();
+            }}
+        >
+            {/* <h2>Enter New User</h2> */}
             <Row className="justify-content-center">
                 <Col md={6}>
-                    <input type="text" required name="name" placeholder="Enter Your Name" />
+                    <input type="text" required name="name" value={user.name} placeholder="Enter Your Name" onChange={handleInputChange} />
                 </Col>
                 <Col md={6}>
-                    <input type="text" required name="gender" placeholder="Enter Your Gender" />
+                    <input type="text" required name="gender" value={user.gender} placeholder="Enter Your Gender" onChange={handleInputChange} />
                 </Col>
                 <Col md={6}>
-                    <input type="email" required name="email" placeholder="Enter Your Email" />
+                    <input type="email" required name="email" value={user.email} placeholder="Enter Your Email" onChange={handleInputChange} />
                 </Col>
                 <Col md={6}>
-                    <input type="text" required name="phone" placeholder="Enter Your Phone Number" />
+                    <input type="text" required name="phone" value={user.phone} placeholder="Enter Your Phone Number" onChange={handleInputChange} />
                 </Col>
                 <Col md={6}>
-                    <input type="submit" value="Save" />
+                    <input  type="submit" value="Save" />
                 </Col>
             </Row>
         </form>
     );
 }
 
-export default addUserForm;
+export default AddUserForm;
