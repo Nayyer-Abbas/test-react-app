@@ -1,19 +1,21 @@
 import {React, useState} from "react";
 import Table from 'react-bootstrap/Table';
-import { Button , Modal } from 'react-bootstrap';
+import { Button , Modal, Dropdown } from 'react-bootstrap';
 import EditUserForm from "./editUserForm";
 import data from "./tableData.json";
+
+import actionButton from '../dots.png';
 
 
 
 const Tabledata = (props) => {
+
     const [users, setUsers] = useState(data);
 
-    const [userToEdit,setUserToEdit] = useState(null);
+    const [userToEdit, setUserToEdit] = useState(null);
+ 
 
     const [editForm, setEditForm] = useState(false);
-
-
 
     const initFormState = {id: "null", name:"", email:"", gender:"", phone:"" }
     const [currentUser, setCurrentUser] = useState(initFormState);
@@ -27,15 +29,16 @@ const Tabledata = (props) => {
     
 
     const updateUser = (id, updatedUser) => {
-        setEditForm(true)
+        setEditForm(true);
 
-        setUsers(users.map((user)=> (user.id === id ? updatedUser : user )))
+        props.setUsers(props.users.map((user)=> (user.id === id ? updatedUser : user )))
     }
+    
 
 
     const editHandler = ( e ,user) => {
         // props.editRow(user);
-        setUserToEdit(user)
+        setUserToEdit(user);
         setModalShow(true);
     }
 
@@ -48,11 +51,12 @@ const Tabledata = (props) => {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
+                
                 <Modal.Header closeButton>
                     <h2>Edit User</h2>
                 </Modal.Header>
                 <Modal.Body>
-                    <EditUserForm setEditForm={setEditForm} currentUser={currentUser} userToEdit={userToEdit} updateUser={updateUser} />
+                    <EditUserForm currentUser={currentUser} userToEdit={userToEdit} updateUser={updateUser} onHide={props.onHide} />
                     
                 </Modal.Body>
             </Modal>
@@ -85,8 +89,16 @@ const Tabledata = (props) => {
                         <td>{user.phone}</td>
                         <td>{user.email}</td>
                         <td>
-                            <Button onClick={(e) => editHandler(e , user)}  variant="primary">Edit</Button>
-                            <Button onClick={() => props.deleteUser(user.id)} variant="danger">Delete</Button>
+                            <Dropdown>
+                                <Dropdown.Toggle id="dropdown-button-dar" variant="secondary"><img src={actionButton} alt="" /></Dropdown.Toggle>
+
+                                <Dropdown.Menu variant="light">
+                                    <Dropdown.Item onClick={(e) => editHandler(e , user)}>Edit</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => props.deleteUser(user.id)}>Delete</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                            {/* <Button onClick={(e) => editHandler(e , user)}  variant="primary">Edit</Button>
+                            <Button onClick={() => props.deleteUser(user.id)} variant="danger">Delete</Button> */}
                         </td>
                     </tr>
                     ))}

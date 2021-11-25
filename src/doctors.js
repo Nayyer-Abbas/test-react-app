@@ -1,5 +1,4 @@
 import React from "react";
-import { ReactDOM } from "react";
 import Button from "@restart/ui/esm/Button";
 import { Container, Row, Col, Modal } from 'react-bootstrap';
 

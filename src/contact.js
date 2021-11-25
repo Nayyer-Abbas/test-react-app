@@ -4,7 +4,6 @@ import { Container, Row, Col, Modal, Button } from 'react-bootstrap';
 import data from "./user-components/tableData.json";
 import AddUserForm from "./user-components/addUserForm";
 import Tabledata from "./user-components/userTable";
-import EditUserForm from "./user-components/editUserForm";
 
 function Contact () {
 
@@ -31,13 +30,8 @@ function Contact () {
         setCurrentUser({ id: user.id, name: user.name, gender: user.gender, email: user.email, phone: user.phone })
     }
 
-    const updateUser = (id, updatedUser) => {
-        setEditForm(true)
 
-        setUsers(users.map((user)=> (user.id === id ? updatedUser : user )))
-    }
-
-    const [modalShow, setModalShow] = React.useState(false);
+    const [modalShow, setModalShow] = useState(false);
     const AddUserModal = (props) => {
         return(
             <Modal
@@ -70,11 +64,9 @@ function Contact () {
                             <Button className="mt-3 float-end" variant="success" onClick={() => setModalShow(true)}>Add New</Button>
                         </Col>
                         <Col md={12} className="my-5 text-center">
-                            
-                            {/* <h1 className="my-5">User Table</h1> */}
-                            <Tabledata users={users} deleteUser={deleteUser}  editRow={editRow} />
+                    
+                            <Tabledata users={users} setUsers={setUsers} deleteUser={deleteUser} editRow={editRow} />
 
-                            {/* <EditUserForm setEditForm={setEditForm} currentUser={currentUser} updateUser={updateUser} /> */}
                         </Col>
                     </Row>
                 </Container>
